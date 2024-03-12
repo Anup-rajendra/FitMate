@@ -142,7 +142,12 @@ export const SignUpForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input id="password" placeholder="Set A Password" {...field} />
+                <Input
+                  id="password"
+                  placeholder="Set A Password"
+                  type="password"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -117,6 +117,7 @@ export default function Page() {
                       <Input
                         id="password"
                         placeholder="Enter Password"
+                        type="password"
                         {...field}
                       />
                     </FormControl>
@@ -134,6 +135,7 @@ export default function Page() {
                       <Input
                         id="confirmpassword"
                         placeholder="Confirm Password"
+                        type="password"
                         {...field}
                       />
                     </FormControl>

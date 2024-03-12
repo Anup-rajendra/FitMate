@@ -33,6 +33,7 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+    --darkbackground:#030014;
   }
 
   .dark {
@@ -73,4 +74,34 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+.bmi-arc {
+  width: 64px; /* Adjust width and height as needed */
+  height: 64px;
+  position: relative;
+}
+
+.bmi-arc .semi-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%; /* Adjust width for desired thickness */
+  height: 50%; /* Adjust height for desired arc size */
+  border-radius: 50%; /* Ensure semicircle shape */
+  border-style: solid;
+  border-width: 0 0 2px 2px; /* Set border for outer arc */
+  box-sizing: border-box; /* Include border width in size calculation */
+}
+
+.bmi-arc .semi-circle:nth-child(1) {
+  /* First semicircle (outer) */
+  border-color: red; /* Adjust color based on your needs */
+}
+
+.bmi-arc .semi-circle:nth-child(2) {
+  /* Second semicircle (inner) */
+  border-color: transparent; /* Transparent border for inner arc */
+  clip-path: inset(0 0 50% 50%); /* Clip inner arc to create semicircle */
+  background-image: linear-gradient(to right, green 0%, orange 50%, red 100%); /* Color gradient for inner arc */
 }
