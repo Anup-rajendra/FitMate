@@ -21,10 +21,16 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import React,{useState} from "react";
-// import BmiArc from "./BmiArc";
+import React, { useState } from "react";
+import BmiArc from "./BmiArc";
 
 const FormSchema1 = z.object({
+  age: z
+    .string()
+    .min(1, {
+      message: "Enter the height in feet",
+    })
+    .max(3),
   height1: z
     .string()
     .min(1, {
@@ -44,10 +50,11 @@ const FormSchema1 = z.object({
     })
     .max(3),
 });
-
-
-const BmiUs = () => {
-  const [bmiData, setBmiData] = useState<number | null>(); 
+interface BmiUsProps {
+  onBmiChange: (bmi: number) => void;
+}
+const BmiUs: React.FC<BmiUsProps> = ({ onBmiChange }) => {
+  const [bmiData, setBmiData] = useState<number | null>();
   async function onSubmit(data: z.infer<typeof FormSchema1>) {
     try {
       console.log(data);
@@ -59,7 +66,9 @@ const BmiUs = () => {
         body: JSON.stringify(data),
       });
       if (response.ok) {
-        setBmiData(await response.json());
+        const bmi = await response.json();
+        setBmiData(bmi);
+        onBmiChange(bmi);
       }
     } catch (error) {
       console.error("Error during Post request or GET request", error);
@@ -68,6 +77,7 @@ const BmiUs = () => {
   const form1 = useForm<z.infer<typeof FormSchema1>>({
     resolver: zodResolver(FormSchema1),
     defaultValues: {
+      age: "",
       height1: "",
       height2: "",
       weight1: "",
@@ -82,6 +92,21 @@ const BmiUs = () => {
         <CardContent>
           <Form {...form1}>
             <form onSubmit={form1.handleSubmit(onSubmit)} className="space-y-8">
+              <div>
+                <FormField
+                  control={form1.control}
+                  name="age"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Your Age</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter Age" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
               <div className="flex flex-row items-center">
                 <div>
                   <FormField
@@ -133,16 +158,11 @@ const BmiUs = () => {
 
           {bmiData && (
             <div className="mt-3">
-              <p>Your BMI: {bmiData}</p>
+              <p>Your BMI: {bmiData ? bmiData : 0}</p>
             </div>
           )}
         </CardContent>
       </Card>
-      {/* {bmiData && (
-        <div className="my-5">
-          <BmiArc bmi={bmiData} />
-        </div>
-      )} */}
     </>
   );
 };

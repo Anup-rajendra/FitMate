@@ -11,7 +11,7 @@ export default function ChattrForm({
   return (
     <form
       onSubmit={(event) => sendMessage(event)}
-      className="bg-primary-foreground text-foreground-primary dark:bg-chattrPitchBlack rounded-b-chattrRoundedLarge border-chattrGray bg-chattrWhite dark:border-chattrTextDark/10 z-40 flex h-16 items-center justify-between border-t px-2 py-2.5"
+      className="dark:bg-chattrPitchBlack rounded-b-chattrRoundedLarge border-chattrGray bg-chattrWhite dark:border-chattrTextDark/10 z-40 flex h-16 items-center justify-between border-t px-2 py-2.5"
     >
       <input
         className="rounded-chattrRoundedMedium border-chattrGray bg-chattrWhite text-chattrText placeholder:text-chattrSecondary/70 focus:border-chattrPrimary dark:border-chattrTextDark/10 dark:bg-chattrBlack dark:text-chattrTextDark dark:placeholder:text-chattrTextDark/50 dark:focus:border-chattrPrimaryDark h-10 min-w-0 flex-auto appearance-none border px-3 py-2 font-light focus:outline-none sm:text-sm"
@@ -26,7 +26,7 @@ export default function ChattrForm({
       <button
         type="submit"
         disabled={loading}
-        className="rounded-chattrRoundedMedium bg-chattrPrimary text-chattrWhite hover:bg-chattrPrimaryDark disabled:bg-chattrPrimary/70 dark:bg-chattrPrimaryDark dark:hover:bg-chattrPrimaryDark/90 ml-2 h-10 flex-none items-center justify-center gap-2 px-3 py-2 text-sm font-semibold outline-offset-2 disabled:cursor-not-allowed"
+        className="rounded-chattrRoundedMedium bg-primary  text-primary-foreground hover:bg-chattrPrimaryDark disabled:bg-chattrPrimary/70 dark:bg-chattrPrimaryDark dark:hover:bg-chattrPrimaryDark/90 ml-2 h-10 flex-none items-center justify-center gap-2 px-3 py-2 text-sm font-semibold outline-offset-2 disabled:cursor-not-allowed"
       >
         Send
       </button>

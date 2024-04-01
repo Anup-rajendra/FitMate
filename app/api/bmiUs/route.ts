@@ -17,11 +17,11 @@ export async function POST(req: Request) {
     const height2 = Number(temp.height2);
     const weight1 = Number(temp.weight1);
     const heightInCm = (height1 * 30.48) + (height2 * 2.54);
-
+    const age = Number(temp.age);
     // Convert weight from pounds to kilograms
     const weightInKg = weight1 * 0.453592;
     const bmi = calculateBMI(heightInCm,weightInKg);
-
+    console.log(temp)
     // Return the BMI value in the response
     return Response.json(bmi);
   } catch (error) {

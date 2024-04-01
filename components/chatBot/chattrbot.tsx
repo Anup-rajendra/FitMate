@@ -7,7 +7,7 @@ import ChattrContainer from "./chattr-container";
 import ChattrFeed from "./chattr-feed";
 import ChattrForm from "./chattr-form";
 import ChattrHeader from "./chattr-header";
-import { ChattrOpenButton } from "../../shared";
+import { ChattrOpenButton } from "@/shared";
 
 import type { ChattrMessage } from "../../types";
 
@@ -18,8 +18,8 @@ import type { ChattrMessage } from "../../types";
 
 export default function Chattrbot() {
   const { isOpen, toggle } = useChattr();
-  const chattrBotName = "Fitmate";
-  const userName = "Visitor";
+  const chattrBotName = "Fitbot";
+  const userName = "You";
   const [loading, setLoading] = React.useState(false);
   const [message, setMessage] = React.useState("");
   const [messages, setMessages] = React.useState<ChattrMessage[]>([
@@ -90,7 +90,7 @@ export default function Chattrbot() {
         loading={loading}
       />
       <ChattrForm
-        message=" "
+        message={message}
         setMessage={setMessage}
         sendMessage={sendMessage}
         loading={loading}

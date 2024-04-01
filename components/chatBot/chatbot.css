@@ -1,0 +1,13 @@
+.scrollbar::-webkit-scrollbar {
+  @apply w-1 h-5;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  @apply rounded-full;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-slate-300;
+  border: 8px white solid;
+  background-clip: padding-box;
+}
