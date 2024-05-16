@@ -9,7 +9,7 @@ type ChattrAssistantMessage = {
 export default function ChattrAssistantMessage({
   key,
   content,
-  chattrBotName = "Chattrbot",
+  chattrBotName = "Fitbot",
 }: ChattrAssistantMessage) {
   return (
     <div key={key} className="mb-3 flex justify-start">

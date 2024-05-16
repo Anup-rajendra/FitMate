@@ -8,8 +8,8 @@ export default function Layout({
   return (
     <div className="flex">
       <div className="flex min-h-screen w-1/2 bg-primary text-primary-foreground">
-        <div className="flex items-start justify-start w-full pl-8 pt-8">
-          <Image alt="Fitmate Logo" height={100} width={100} src="/fit.png" />
+        <div className="flex items-center justify-center w-full  ">
+          <Image alt="Fitmate Logo" height={400} width={400} src="/fit.png" />
         </div>
       </div>
       <div className="min-h-screen flex items-center justify-center w-1/2 ">

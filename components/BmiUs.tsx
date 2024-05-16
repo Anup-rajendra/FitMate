@@ -85,7 +85,7 @@ const BmiUs: React.FC<BmiUsProps> = ({ onBmiChange }) => {
   });
   return (
     <>
-      <Card className="w-[400px]">
+      <Card className="w-[400px] bg-muted">
         <CardHeader>
           <CardTitle>Calculate BMI in US units</CardTitle>
         </CardHeader>

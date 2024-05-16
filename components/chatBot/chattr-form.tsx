@@ -26,7 +26,7 @@ export default function ChattrForm({
       <button
         type="submit"
         disabled={loading}
-        className="rounded-chattrRoundedMedium bg-primary  text-primary-foreground hover:bg-chattrPrimaryDark disabled:bg-chattrPrimary/70 dark:bg-chattrPrimaryDark dark:hover:bg-chattrPrimaryDark/90 ml-2 h-10 flex-none items-center justify-center gap-2 px-3 py-2 text-sm font-semibold outline-offset-2 disabled:cursor-not-allowed"
+        className="rounded-chattrRoundedMedium bg-primary  text-primary-foreground hover:bg-chattrGray hover:text-primary  disabled:bg-chattrGray/70  dark:bg-chattrPrimaryDark dark:hover:bg-chattrPrimaryDark/90 ml-2 h-10 flex-none items-center justify-center gap-2 px-3 py-2 text-sm font-semibold outline-offset-2 disabled:cursor-not-allowed"
       >
         Send
       </button>
