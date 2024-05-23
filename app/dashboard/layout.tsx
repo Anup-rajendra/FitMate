@@ -1,28 +1,48 @@
+"use client";
 import React from "react";
 import Chattrbot from "@/components/chatBot/chattrbot";
 import Image from "next/image";
-export default function ChattrContainer({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div>
       <div className="w-full dark bg-background">
-        <section className="flex items-center justify-center  pt-8 text-sm leading-5   text-opacity-90 pb-10  max-md:px-5 gap-96 border-b-2">
-          <Image alt="Fitmate Logo" height={100} width={100} src="/fit.png" />
-          <div className="flex gap-5 justify-center  max-md:flex-wrap">
-            <div className="flex gap-5 justify-between px-6 py-2 border border-solid  bg-opacity-0 border-b border-foreground border-opacity-10 rounded-[999px] max-md:px-5 shadow-xl dark text-foreground bg-muted">
-              <div className="grow whitespace-nowrap">BMI Calculator</div>
-              <div className="flex-auto">Diet Recommendation</div>
-              <div className="grow whitespace-nowrap">
-                Exercise Recommendation
+        <section className="flex items-center justify-between pt-8 text-sm leading-5 text-opacity-90 pb-10 px-10 border-b-2">
+          <div className="flex w-full justify-between items-center">
+            <Image alt="Fitmate Logo" height={100} width={100} src="/fit.png" />
+            <div>
+              <div className="flex gap-5 items-center justify-center px-6 py-2 border border-solid bg-opacity-0 border-b border-foreground border-opacity-10 rounded-[9999px] shadow-xl dark text-foreground bg-muted">
+                <Link
+                  href="/dashboard/#bmi-calculator"
+                  className="  whitespace-nowrap scroll-smooth"
+                >
+                  BMI Calculator
+                </Link>
+                <Link
+                  href="/dashboard/#diet-recommendation"
+                  className="  whitespace-nowrap scroll-smooth"
+                >
+                  Diet Recommendation
+                </Link>
+                <Link
+                  href="/dashboard/#exercise-recommendation"
+                  className="  whitespace-nowrap scroll-smooth"
+                >
+                  Exercise Recommendation
+                </Link>
               </div>
+            </div>
+            <div>
+              <Button>
+                <Link href="/sign-in">Logout</Link>
+              </Button>
             </div>
           </div>
           <hr className="shrink-0 mt-5 h-px max-md:max-w-full" />
         </section>
-        <div className=" w-full">{children}</div>
+        <div className="w-full">{children}</div>
       </div>
       <div>
         <Chattrbot />
@@ -30,5 +50,3 @@ export default function ChattrContainer({
     </div>
   );
 }
-// bg-gradient-to-b from-midnight to-slate-700
-//bg-gradient-to-b from-midnight to-slate-900

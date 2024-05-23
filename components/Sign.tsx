@@ -1,5 +1,5 @@
 // Login.tsx
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -14,7 +14,7 @@ import Link from "next/link";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
+import { toast, Toaster } from "sonner";
 const FormSchema = z.object({
   username: z.string().min(1, { message: "Username is required" }).max(100),
   firstname: z
@@ -44,6 +44,7 @@ const FormSchema = z.object({
 
 export const SignUpForm = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const formone = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -55,6 +56,7 @@ export const SignUpForm = () => {
     },
   });
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    setLoading(true);
     const response = await fetch("api/user", {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -69,98 +71,100 @@ export const SignUpForm = () => {
     if (response.ok) {
       router.push("/sign-in");
     } else {
-      toast("Registration Failed", {
-        description: "User with this Username or Email already exists",
-        action: {
-          label: "Close",
-          onClick: () => console.log("Undo"),
-        },
+      toast.error("Failed To SignUp", {
+        description: "The email or username already exists",
       });
+      setLoading(false);
       console.error("Registration Failed");
     }
   };
   return (
-    <Form {...formone}>
-      <form
-        onSubmit={formone.handleSubmit(onSubmit)}
-        className="flex flex-col gap-3 "
-      >
-        <FormField
-          control={formone.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input id="Username" placeholder="Username" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className="flex gap-3 justify-even">
+    <>
+      <Toaster closeButton richColors />
+      <Form {...formone}>
+        <form
+          onSubmit={formone.handleSubmit(onSubmit)}
+          className="flex flex-col gap-3 "
+        >
           <FormField
             control={formone.control}
-            name="firstname"
+            name="username"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input id="Firstname" placeholder="Firstname" {...field} />
+                  <Input id="Username" placeholder="Username" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <FormField
-            control={formone.control}
-            name="lastname"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input id="Lastname" placeholder="Lastname" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+          <div className="flex gap-3 justify-even">
+            <FormField
+              control={formone.control}
+              name="firstname"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input id="Firstname" placeholder="Firstname" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={formone.control}
+              name="lastname"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input id="Lastname" placeholder="Lastname" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
-        <FormField
-          control={formone.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input id="E-mail" placeholder="E-mail" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={formone.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input
-                  id="password"
-                  placeholder="Set A Password"
-                  type="password"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button className="w-full">Get Started</Button>
-        <p className="text-center text-sm text-gray-600 mt-2">
-          If you already have an account, please&nbsp;
-          <Link className="text-blue-500 hover:underline" href="/sign-in">
-            Login
-          </Link>
-        </p>
-      </form>
-    </Form>
+          <FormField
+            control={formone.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input id="E-mail" placeholder="E-mail" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={formone.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input
+                    id="password"
+                    placeholder="Set A Password"
+                    type="password"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button className="w-full" disabled={loading}>
+            {loading ? "Signing Up..." : "Get Started"}
+          </Button>
+          <p className="text-center text-sm text-gray-600 mt-2">
+            If you already have an account, please&nbsp;
+            <Link className="text-blue-500 hover:underline" href="/sign-in">
+              Login
+            </Link>
+          </p>
+        </form>
+      </Form>
+    </>
   );
 };

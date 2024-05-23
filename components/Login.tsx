@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -29,6 +29,7 @@ const FormSchema = z.object({
 });
 export const LoginForm = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -37,6 +38,7 @@ export const LoginForm = () => {
     },
   });
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    setLoading(true);
     const signInData = await signIn("credentials", {
       username: data.username,
       password: data.password,
@@ -47,6 +49,7 @@ export const LoginForm = () => {
       toast.error("Failed To Login", {
         description: "Incorrect Username or Password",
       });
+      setLoading(false);
     } else {
       console.log(router);
       router.push("/dashboard");
@@ -95,7 +98,9 @@ export const LoginForm = () => {
             </Link>
           </div> */}
 
-          <Button type="submit">Login</Button>
+          <Button type="submit" disabled={loading}>
+            {loading ? "Logging In..." : "Login"}
+          </Button>
           <p className="text-center text-sm text-gray-600 mt-2">
             If you don&apos;t have an account, please&nbsp;
             <Link className="text-blue-500 hover:underline" href="/sign-up">

@@ -155,12 +155,6 @@ const BmiUs: React.FC<BmiUsProps> = ({ onBmiChange }) => {
               <Button type="submit">Submit</Button>
             </form>
           </Form>
-
-          {bmiData && (
-            <div className="mt-3">
-              <p>Your BMI: {bmiData ? bmiData : 0}</p>
-            </div>
-          )}
         </CardContent>
       </Card>
     </>
