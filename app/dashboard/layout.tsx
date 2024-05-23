@@ -4,7 +4,7 @@ import Chattrbot from "@/components/chatBot/chattrbot";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-
+import { signOut } from "next-auth/react";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div>
@@ -35,8 +35,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </div>
             </div>
             <div>
-              <Button>
-                <Link href="/sign-in">Logout</Link>
+              <Button onClick={() => signOut({ callbackUrl: "/sign-in" })}>
+                Logout
               </Button>
             </div>
           </div>
